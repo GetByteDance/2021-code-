@@ -1,0 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+long long C(int n, int m)
+{
+	int i;
+	long long ans = 1;
+	long long ans1 = 1;
+	if (m > n - m)m = n - m;
+	for (i = n; i > n - m;i--)
+	{
+		ans *= i;
+	}
+	for (i = 1; i <= m; i++)
+	{
+		ans1 *= i;
+	}
+	return ans/ans1;
+}
+int main()
+{
+	int n, m;
+	scanf("%d%d", &n, &m);
+	long long result = C(n, m);
+	printf("%ld\n", result);
+	return 0;
+}
