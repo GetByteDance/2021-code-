@@ -1,0 +1,25 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<iostream>
+#include<ctime>
+using namespace std;
+int main()
+{
+	srand((unsigned)time(NULL));
+	int n = rand()%100+1;
+	while (1)
+	{
+		int k = 0;
+		cin >> k ;
+		if (n > k)
+			cout << "猜小了" << endl;
+		if (n < k)
+			cout << "猜大了" << endl;
+		if (n == k)
+		{
+			cout << "猜对了" << endl;
+			break;
+		}
+	}
+	system("pause");
+	return 0;
+}
