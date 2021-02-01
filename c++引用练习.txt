@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<iostream>
+using namespace std;
+
+//练习引用
+void swap(int &b, int &a)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
+int main()
+{
+	int a = 50;
+	int b = 20;
+	int &c = b;
+	c = 10;
+	cout << "b，a交换前：" << endl;
+	cout << "a的值为：" << a << endl;
+	cout << "b的值为：" << b << endl;
+	cout << "c的值为：" << c << endl;
+	swap(b, a);
+	cout << "b，a交换后：" << endl;
+	cout << "a的值为：" << a << endl;
+	cout << "b的值为：" << b << endl;
+	cout << "c的值为：" << c << endl;
+	system("pause");
+	return 0;
+}
