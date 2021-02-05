@@ -1,0 +1,79 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+const int maxn = 30;
+int n;//有n个木块
+vector<int>pile[maxn];//每个pile[i]是一个vector
+
+//找木块a所在的pile（堆）和height（高），以引用的形式返回调用者
+void find_block(int a, int& p, int& h)
+{
+	for (p = 0; p < n; p++)
+	for (h = 0; h < pile[p].size(); h++)
+	if (pile[p][h] == a)
+		return;
+	
+}
+
+//把p堆高度为h的木块上方的木块移回原位
+void clear_above(int p, int h)
+{
+	//高度h以上的都要移回原位，所以从h+1遍历
+for (int i = h + 1; i < pile[p].size(); i++)
+	{
+		//编号是几的木块原来就是在哪一堆，直接把该木块对应的堆插入该编号
+		pile[pile[p][i]].push_back(pile[p][i]);
+	}
+	//通过改变 vector (pile[p]) 的大小来删除已经归位的木块（编号）
+	pile[p].resize(h + 1);
+}
+//将pa堆高度为 ha及其上方的木块 整体移动到pb堆的 顶部 
+void pile_onto(int pa, int ha, int pb)
+{
+	//因为要一个一个的放，所以要遍历(从ha高度开始遍历）
+	for (int i = ha; i < pile[pa].size(); i++)
+	{
+		pile[pb].push_back(pile[pa][i]);
+		//修改大小
+	}		
+	pile[pa].resize(ha);//0~ha-1共ha个数，所以大小是ha
+
+}
+void print()
+{
+	//按行输出
+	for (int i = 0; i < n; i++)
+	{
+		cout << i << "：";
+		for (int j = 0; j < pile[i].size(); j++)
+			cout << " " << pile[i][j];
+		cout << endl;
+	}
+}
+int main()
+{
+	int a, b;
+	cin >> n;
+	string s1, s2;
+	for (int i = 0; i < n; i++)
+	{
+		pile[i].push_back(i);//给木块编号
+	}
+	while (cin >> s1 && s1 != "quit" && cin >> a >> s2 >> b)
+	{
+		int pa, pb, ha, hb;//pa（pb）为木块a（b）所在的堆数，ha（hb）为木块a（b）所在的高度
+		//找到木块a，b所在的堆数和高度
+		find_block(a, pa, ha);
+		find_block(b, pb, hb);
+		if (pa == pb) continue;//由题意该情况为非法，直接跳过该步骤
+		if (s1 == "move") clear_above(pa, ha);
+		if (s2 == "onto") clear_above(pb, hb);
+		//将pa堆高度为 ha及其上方的木块 整体移动到pb堆的 顶部 
+		pile_onto(pa, ha, pb);
+	} 
+	//上述循环是在移动木块，移动完之后是打印
+	print();
+	system("pause");
+	return 0;
+}
