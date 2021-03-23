@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int a[8] = {0};
+    int b[8] = {0};
+    int sum[8] = {0};
+    for(int i = 1;i<=7;i++)
+    {
+        cin>>a[i]>>b[i];
+        sum[i] = a[i] + b[i];
+    }
+    int max = sum[1];
+    for(int j = 1;j<=7;j++)
+    {
+        if(sum[j]>max)
+            max=sum[j];
+    }
+    int j = 0;
+    for(j = 1;j<=7;j++)
+    {
+        if(max==sum[j])
+            break;
+    }
+    if(max>8)
+        cout<<j<<endl;
+    else
+        cout<<0<<endl;    
+    return 0;
+}
