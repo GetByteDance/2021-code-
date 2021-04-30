@@ -1,0 +1,30 @@
+from random import*
+from time import*
+seed(time())
+n = randint(0,100)
+while 1 :
+   try :
+      x = eval(input("请输入所猜数字："))
+      m = 1
+      if x==n :
+         print("预测1次，你猜中了")
+         break
+      else :
+         while x!=n :
+            if x<n :
+               print("遗憾，太小了")
+               x = eval(input("请输入所猜数字："))
+               m+=1
+               if x==n :
+                  print("预测{}次，你猜中了！".format(m))
+                  break
+            elif x>n :
+               print("遗憾，太大了")
+               x = eval(input("请输入所猜数字："))
+               m+=1
+               if x==n :
+                  print("预测{}次，你猜中了！".format(m))
+                  break
+         break
+   except :
+      print("输入内容必须为整数！")
